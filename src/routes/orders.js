@@ -1,40 +1,43 @@
 const express = require("express");
 const productModel = require("../models/orderModels");
-const cors = require('cors');
-
-const app = express();
-app.use(cors());
+const cors = require("cors");
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.send("Hello world");
-})
+router.use(cors());
 
-//create order
-router.post("/orders", (req, res) => {
-  productModel
-    .create(req.body)
-    .then((data) => res.json(data))
-    .then(() => console.log("Se ha creado un producto"))
-    .catch((error) => res.json({ message: error }));
+// Endpoint de prueba
+router.get("/", (req, res) => {
+  res.send("Hello world");
 });
 
-//read order
-router.get("/orders", (req, res) => {
+// Crear pedido
+router.post("/orders", (req, res, next) => {
+  productModel
+    .create(req.body)
+    .then((data) => {
+      console.log("Se ha creado un pedido:", data);
+      res.status(201).json(data); // 201 Created
+    })
+    .catch(next);
+});
+
+// Leer pedidos
+router.get("/orders", (req, res, next) => {
   productModel
     .find()
     .then((data) => res.json(data))
-    .catch((error) => res.json({ message: error }));
+    .catch(next);
 });
 
-//delete orders
-router.delete("/orders", (req, res) => {
-    productModel.deleteMany({})
-      .then((data) => res.json({ message: "Todos los productos han sido eliminados." }))
-      .catch((error) => res.json({ message: error }));
-  });
-
-
+// Eliminar todos los pedidos
+router.delete("/orders", (req, res, next) => {
+  productModel
+    .deleteMany({})
+    .then(() => {
+      res.status(204).send(); // 204 No Content
+    })
+    .catch(next);
+});
 
 module.exports = router;

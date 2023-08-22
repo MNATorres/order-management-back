@@ -1,18 +1,23 @@
-const express = require('express');
-require('dotenv').config();
+const express = require("express");
+require("dotenv").config();
 const orderRoutes = require("./routes/orders");
-const cors = require('cors');
+const cors = require("cors");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
-app.use('/api', orderRoutes);
 
-require('./dataBase');
+app.use("/api", orderRoutes);
 
-app.use(require('./routes/orders'));
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something went wrong!");
+});
 
-app.listen(PORT, () => console.log("El servidor se esta escuchando en el puerto", PORT));
+require("./dataBase");
 
+app.listen(PORT, () =>
+  console.log("El servidor se está escuchando en el puerto", PORT)
+);
