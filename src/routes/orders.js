@@ -1,8 +1,11 @@
 const express = require("express");
 const productModel = require("../models/orderModels");
+const ProductServiceClass = require("./../services/orderService");
 const cors = require("cors");
 
 const router = express.Router();
+
+const productService = new ProductServiceClass(productModel);
 
 router.use(cors());
 
@@ -24,8 +27,8 @@ router.post("/orders", (req, res, next) => {
 
 // Leer pedidos
 router.get("/orders", (req, res, next) => {
-  productModel
-    .find()
+  return productService
+    .getOrders(req.query)
     .then((data) => res.json(data))
     .catch(next);
 });

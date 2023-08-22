@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 
 const orderSchema = mongoose.Schema({
   id: Number,
-  createDate: String,
+  createDate: Number,
   status: String,
   client: String,
   shippingAddress: String,
-  shippingPromise: String,
+  shippingPromise: Number,
   items: [
     {
       id: Number,
