@@ -1,10 +1,18 @@
 const express = require('express');
+require('dotenv').config();
+const orderRoutes = require("./routes/orders");
+const cors = require('cors');
 
-const app = express()
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.use(cors());
+app.use(express.json());
+app.use('/api', orderRoutes);
 
 require('./dataBase');
 
-app.use(require('./routes/index.routes'));
+app.use(require('./routes/orders'));
 
-app.listen(3000);
-console.log("el servidor está escuchando en el puerto 3000")
+app.listen(PORT, () => console.log("El servidor se esta escuchando en el puerto", PORT));
+
