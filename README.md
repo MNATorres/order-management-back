@@ -23,11 +23,11 @@ Para ejecutar este backend necesitas tener instalado:
 ## Uso
 Este backend ofrece una API REST con las siguientes rutas y métodos:
 
-•  GET /orders: devuelve un array con las ordenes.
+•  GET /api/orders: devuelve un array con las ordenes.
 
-•  POST /users: crea un array de ordenes.
+•  POST /api/orders: crea un array de ordenes.
 
-•  DELETE /users/:id: elimina todas las ordenes.
+•  DELETE /api/orders: elimina todas las ordenes.
 
 ## Próximos Pasos
 Utilizar Typescript, agregar mas validaciones al código, testear las funciones. 
