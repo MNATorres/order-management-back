@@ -2,20 +2,21 @@ class OrderService {
   constructor(model) {
     this.model = model;
   }
+
   async getOrders({ status, startDate, endDate, nearExpiration }) {
     let filter = {};
     if (status) {
       filter = { ...filter, status };
     }
-    let dateFIlter = {};
+    let dateFilter = {};
     if (startDate) {
-      dateFIlter = { ...dateFIlter, $gte: startDate };
+      dateFilter = { ...dateFilter, $gte: startDate };
     }
     if (endDate) {
-      dateFIlter = { ...dateFIlter, $lte: endDate };
+      dateFilter = { ...dateFilter, $lte: endDate };
     }
     if (startDate || endDate) {
-      filter = { ...filter, createDate: dateFIlter, status: "Traveling" };
+      filter = { ...filter, createDate: dateFilter, status: "Traveling" };
     }
     if (nearExpiration) {
       filter = {
@@ -24,8 +25,27 @@ class OrderService {
         status: "Approve",
       };
     }
-    return this.model
-      .find(filter)
+
+    return this.model.find(filter);
+  }
+
+  async deleteOrders() {
+    try {
+      await this.model.deleteMany({});
+      return { mensaje: "Todos los pedidos se eliminaron exitosamente." };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async createOrder(datosPedido) {
+    try {
+      const pedidoCreado = await this.model.create(datosPedido);
+      console.log("Se ha creado un nuevo pedido:", pedidoCreado);
+      return pedidoCreado;
+    } catch (error) {
+      throw error;
+    }
   }
 }
 

@@ -9,23 +9,19 @@ const productService = new ProductServiceClass(productModel);
 
 router.use(cors());
 
-// Endpoint de prueba
 router.get("/", (req, res) => {
   res.send("Hello world");
 });
 
-// Crear pedido
 router.post("/orders", (req, res, next) => {
-  productModel
-    .create(req.body)
+  return productService
+    .createOrder(req.body)
     .then((data) => {
-      console.log("Se ha creado un pedido:", data);
-      res.status(201).json(data); // 201 Created
+      res.status(201).json(data);
     })
     .catch(next);
 });
 
-// Leer pedidos
 router.get("/orders", (req, res, next) => {
   return productService
     .getOrders(req.query)
@@ -33,14 +29,12 @@ router.get("/orders", (req, res, next) => {
     .catch(next);
 });
 
-// Eliminar todos los pedidos
 router.delete("/orders", (req, res, next) => {
-  productModel
-    .deleteMany({})
+  return productService
+    .deleteOrders()
     .then(() => {
-      res.status(204).send(); // 204 No Content
+      res.status(204).send();
     })
     .catch(next);
 });
-
 module.exports = router;
