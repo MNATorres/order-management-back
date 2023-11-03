@@ -1,9 +1,10 @@
 const express = require("express");
-const orderRoutes = require("./routes/orders");
+const orderRoutes = require("./src/routes/orders");
 const cors = require("cors");
+require("dotenv").config();
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -15,7 +16,7 @@ app.use((err, req, res, next) => {
   res.status(500).send("Something went wrong!");
 });
 
-require("./dataBase");
+require("./src/dataBase");
 
 app.listen(PORT, () =>
   console.log("El servidor se está escuchando en el puerto", PORT)
