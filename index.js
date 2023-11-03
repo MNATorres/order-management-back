@@ -6,7 +6,12 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
+const corsOptions = {
+  origin: ["https://ubiquitous-jelly-924be3.netlify.app/", "http://localhost:5173", "https://gbsh2x1h-5173.brs.devtunnels.ms"],
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use("/api", orderRoutes);
