@@ -7,7 +7,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const corsOptions = {
-  origin: ["https://ubiquitous-jelly-924be3.netlify.app/", "http://localhost:5173", "https://gbsh2x1h-5173.brs.devtunnels.ms"],
+  origin: [
+    "https://ubiquitous-jelly-924be3.netlify.app",
+    "http://localhost:5173",
+    "https://gbsh2x1h-5173.brs.devtunnels.ms",
+  ],
   optionsSuccessStatus: 200,
 };
 
