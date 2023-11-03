@@ -11,7 +11,7 @@ const corsOptions = {
     "https://ubiquitous-jelly-924be3.netlify.app",
     "http://localhost:5173",
     "https://gbsh2x1h-5173.brs.devtunnels.ms",
-    "https://order-management-back.vercel.app/",
+    "https://order-management-back.vercel.app",
   ],
   optionsSuccessStatus: 200,
 };
