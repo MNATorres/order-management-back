@@ -16,6 +16,10 @@ app.use((err, req, res, next) => {
   res.status(500).send("Something went wrong!");
 });
 
+app.get("/", (req, res) => {
+  res.send("Bienvenidos a mi Api Dashboard");
+});
+
 require("./src/dataBase");
 
 app.listen(PORT, () =>
